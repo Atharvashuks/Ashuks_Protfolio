@@ -52,8 +52,6 @@ const EmailSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("FormData from frontend", formData);
-
     const response = await fetch("/api/send", {
       method: "POST",
       headers: {
@@ -61,7 +59,6 @@ const EmailSection = () => {
       },
       body: JSON.stringify(formData),
     });
-    console.log(await response.json());
 
     if (response.status === 200) {
       console.log("Message sent.");

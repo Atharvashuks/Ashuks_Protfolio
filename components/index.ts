@@ -5,3 +5,4 @@ export { default as ProjectTag } from "./ProjectTag";
 export { default as TabButton } from "./TabButton";
 export { default as ToggleButton } from "./ToggleButton";
 export { default as AnimatedCounter } from "./AnimatedCounter";
+export { default as Loader } from "./Loader";
