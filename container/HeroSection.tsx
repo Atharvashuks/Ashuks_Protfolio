@@ -5,6 +5,17 @@ import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
+const arr = [
+  "Atharva",
+  2000,
+  "Web Developer",
+  1000,
+  "Mobile Developer",
+  1000,
+  "UI/UX Designer",
+  1000,
+];
+
 const HeroSection = () => {
   return (
     <section className="lg:py-16">
@@ -22,16 +33,7 @@ const HeroSection = () => {
             <br></br>
             <TypeAnimation
               className="text-[#000042] dark:text-white"
-              sequence={[
-                "Atharva",
-                2000,
-                "Web Developer",
-                1000,
-                "Mobile Developer",
-                1000,
-                "UI/UX Designer",
-                1000,
-              ]}
+              sequence={arr}
               wrapper="span"
               speed={50}
               repeat={Infinity}
