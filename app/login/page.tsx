@@ -34,7 +34,7 @@ export default function LoginPage() {
 
     if (response.status == 200) {
       localStorage.setItem("token", data.token);
-      router.push("/admin");
+      router.push("/admin/home");
     } else {
       alert(data.message);
     }

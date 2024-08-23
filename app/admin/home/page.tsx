@@ -2,9 +2,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { AdminNavbar, AdminSidebar, Loader, InputForm } from "../../components";
-import FormControl from "../../components/FormControl";
-import { AboutControls, TabDataControls } from "../../dataConfig";
+import { AdminNavbar, AdminSidebar, Loader, InputForm } from "../../../components";
+import FormControl from "../../../components/FormControl";
+import { AboutControls, TabDataControls } from "../../../dataConfig";
 
 export default function Page() {
   const router = useRouter();
@@ -65,16 +65,7 @@ export default function Page() {
       <div className="flex-1 flex flex-col">
         <AdminNavbar />
         <main className="flex-1 p-8">
-          <FormControl
-            controls={AboutControls}
-            formData={formData}
-            setFormData={setFormData}
-          />
-          <FormControl
-            controls={TabDataControls}
-            formData={formData}
-            setFormData={setFormData}
-          />
+         hi Admin
         </main>
       </div>
     </div>
