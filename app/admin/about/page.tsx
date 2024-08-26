@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import { AdminNavbar, AdminSidebar } from "../../../components";
 import { AboutControls, TabDataControls } from "../../../dataConfig";

@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const ProjectSectionSchema = new mongoose.Schema(
   {
-    id: Number,
     name: String,
     tag: String,
   },

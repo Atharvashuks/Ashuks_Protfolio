@@ -1,9 +1,26 @@
-import React from 'react'
+"use client"
+
+import React from "react";
+import { AdminNavbar, AdminSidebar } from "../../../components";
+import {  ProjectDataControls } from "../../../dataConfig";
+import FormControl from "../../../components/FormControl";
 
 const page = () => {
   return (
-    <div>projectData</div>
-  )
-}
+    <div className="flex">
+      <AdminSidebar />
+      <div className="flex-1 flex flex-col">
+        <AdminNavbar />
+        <main className="flex-1 p-8">
+          <FormControl
+            controls={ProjectDataControls}
+            formData={undefined}
+            setFormData={undefined}
+          />
+        </main>
+      </div>
+    </div>
+  );
+};
 
-export default page
+export default page;

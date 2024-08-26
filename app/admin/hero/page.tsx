@@ -1,6 +1,6 @@
 import React from "react";
 import { AdminNavbar, AdminSidebar } from "../../../components";
-import { AboutControls } from "../../../dataConfig";
+import { AchivementsControls, HeroSectionControld } from "../../../dataConfig";
 import FormControl from "../../../components/FormControl";
 
 const page = () => {
@@ -11,7 +11,12 @@ const page = () => {
         <AdminNavbar />
         <main className="flex-1 p-8">
           <FormControl
-            controls={AboutControls}
+            controls={HeroSectionControld}
+            formData={undefined}
+            setFormData={undefined}
+          />
+           <FormControl
+            controls={AchivementsControls}
             formData={undefined}
             setFormData={undefined}
           />
