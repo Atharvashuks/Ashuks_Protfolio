@@ -1,9 +1,12 @@
-import React from "react";
+"use client"
+
+import React, { useState } from "react";
 import { AdminNavbar, AdminSidebar } from "../../../components";
 import { AchivementsControls, HeroSectionControld } from "../../../dataConfig";
 import FormControl from "../../../components/FormControl";
 
 const page = () => {
+  const [formData, setformData] = useState()
   return (
     <div className="flex">
       <AdminSidebar />
@@ -12,13 +15,13 @@ const page = () => {
         <main className="flex-1 p-8">
           <FormControl
             controls={HeroSectionControld}
-            formData={undefined}
-            setFormData={undefined}
+            formData={formData}
+            setFormData={setformData}
           />
            <FormControl
             controls={AchivementsControls}
-            formData={undefined}
-            setFormData={undefined}
+            formData={formData}
+            setFormData={setformData}
           />
         </main>
       </div>
