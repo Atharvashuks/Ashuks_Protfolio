@@ -15,10 +15,10 @@ const FormControl = ({ controls, formData, setFormData }) => {
         label={item.label}
         placeholder={item.placeholder}
         type={item.type}
-          value={formData[item.name] || " "}
-          onChange={(e) => {
-            setFormData({ ...formData, [item.name]: e.target.value });
-          }}
+        value={formData[item.name] || " "}
+        onChange={(e) => {
+          setFormData({ ...formData, [item.name]: e.target.value });
+        }}
       />
     )
   );

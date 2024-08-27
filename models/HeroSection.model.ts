@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const ActivementDetailsSchema = new mongoose.Schema(
   {
+    id: Number,
     prefix: String,
     metrix: String,
     value: String,

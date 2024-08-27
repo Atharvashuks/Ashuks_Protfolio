@@ -68,7 +68,7 @@ export const AchivementsControls = [
     type: "text",
     name: "postfix",
   },
-]
+];
 
 export const HeroSectionControld = [
   {
@@ -92,7 +92,7 @@ export const HeroSectionControld = [
     type: "textarea",
     name: "summary",
   },
-]
+];
 
 export const ProjectDataControls = [
   {
@@ -137,7 +137,7 @@ export const ProjectDataControls = [
     type: "text",
     name: "previewUrl",
   },
-]
+];
 
 export const ProjectSectionControls = [
   {
@@ -154,4 +154,4 @@ export const ProjectSectionControls = [
     type: "text",
     name: "tag",
   },
-]
+];

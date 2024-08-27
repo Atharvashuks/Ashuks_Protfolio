@@ -35,7 +35,11 @@ export const getData = async (currentTab, token) => {
   }
 };
 
-export const updateData = async (currentTab, formData, token) => {
+export const updateData = async (
+  currentTab: any,
+  formData: any,
+  token: any
+) => {
   try {
     const response = await fetch(`/api/data/${currentTab}/UPDATE`, {
       method: "PUT",
