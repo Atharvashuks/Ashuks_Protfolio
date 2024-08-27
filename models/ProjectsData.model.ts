@@ -13,8 +13,8 @@ const ProjectsDataSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const ProjectsData =
+const ProjectData =
   mongoose.models.ProjectsData ||
   mongoose.model("ProjectsData", ProjectsDataSchema);
 
-export default ProjectsData;
+export default ProjectData;

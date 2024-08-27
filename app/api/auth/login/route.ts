@@ -18,7 +18,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         { username: user.username, role: user.role },
         SECRET_KEY,
         {
-          expiresIn: "1h",
+          expiresIn: "24h",
         }
       );
 

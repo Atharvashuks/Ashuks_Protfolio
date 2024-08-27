@@ -1,0 +1,28 @@
+{
+  "Logo": "Ashuks",
+  "header": [
+    "Atharva",
+    2000,
+    "Web Developer",
+    1000,
+    "Mobile Developer",
+    1000,
+    "UI/UX Designer",
+    1000
+  ],
+  "summary": "test summary",
+  "achivementNumbers": [
+    {
+      "prefix": "test1",
+      "metrix": "test2",
+      "value": "12",
+      "postfix": "test3"
+    },
+    {
+      "prefix": "test4",
+      "metrix": "test5",
+      "value": "12345",
+      "postfix": "test6"
+    }
+  ]
+}

@@ -8,18 +8,18 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchAdminData = async () => {
-      const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   const fetchAdminData = async () => {
+  //     const token = localStorage.getItem("token");
 
-      if (token) {
-        router.push("/admin");
-        return;
-      }
-    };
+  //     if (token) {
+  //       router.push("/admin");
+  //       return;
+  //     }
+  //   };
 
-    fetchAdminData();
-  }, [router]);
+  //   fetchAdminData();
+  // }, [router]);
 
   const handleLogin = async () => {
     const response = await fetch("/api/auth/login", {
@@ -34,7 +34,7 @@ export default function LoginPage() {
 
     if (response.status == 200) {
       localStorage.setItem("token", data.token);
-      router.push("/admin");
+      router.push("/admin/home");
     } else {
       alert(data.message);
     }
