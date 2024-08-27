@@ -11,3 +11,4 @@ export { default as AdminSidebar } from "./AdminSidebar";
 export { default as AdminNavbar } from "./AdminNavbar";
 
 export { default as InputForm } from "./InputForm";
+export { default as FormControl } from "./FormControl";

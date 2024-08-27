@@ -5,11 +5,9 @@ export async function updateDocument(model, id, updateData) {
   try {
     await connectToDB();
 
-    const { Logo, header, summary, achivementNumbers } = updateData;
-
     const updatedDocument = await model.findOneAndUpdate(
       { _id: id },
-      { Logo, header, summary, achivementNumbers },
+      updateData,
       { new: true }
     );
 

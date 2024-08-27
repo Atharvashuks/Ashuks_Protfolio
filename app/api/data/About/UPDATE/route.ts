@@ -10,9 +10,6 @@ export const PUT = authGuard(async (req) => {
     const extractData = await req.json();
     const { _id, ...updateFields } = extractData;
 
-    // console.log("I am ID", _id);
-    // console.log("I am updated data", updateFields);
-
     const response = await updateDocument(About, _id, updateFields);
 
     return NextResponse.json(response);

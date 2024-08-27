@@ -118,10 +118,10 @@ export const ProjectDataControls = [
   },
   {
     id: 4,
-    label: "tags",
+    label: "tag",
     placeholder: "Add these in array format",
-    type: "textarea",
-    name: "tags",
+    type: "text",
+    name: "tag",
   },
   {
     id: 5,

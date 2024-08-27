@@ -45,6 +45,7 @@ const page = () => {
   }, []);
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     const token = localStorage.getItem("token");
     try {
       const mergedData = {
@@ -53,6 +54,9 @@ const page = () => {
       };
 
       const response = await updateData("HeroSection", mergedData, token);
+      if (response.success) {
+        setIsLoading(false);
+      }
     } catch (error) {
       console.log(error);
     }

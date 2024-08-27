@@ -1,11 +1,79 @@
-"use client"
+"use client";
 
-import React from "react";
-import { AdminNavbar, AdminSidebar } from "../../../components";
+import React, { useEffect, useState } from "react";
+import { AdminNavbar, AdminSidebar, Loader } from "../../../components";
 import { AboutControls, TabDataControls } from "../../../dataConfig";
 import FormControl from "../../../components/FormControl";
+import { getData, updateData } from "../../../apiEndpoint";
+
+const InitialTabDataSchema = {
+  title: String,
+  id: String,
+  content: [String],
+};
+
+const InitialFormData = {
+  aboutme: String,
+  tabData: [InitialTabDataSchema],
+  letsConnect: String,
+};
 
 const page = () => {
+  const [formData, setformData] = useState(InitialFormData);
+  const [tabDataSchema, setTabDataSchema] = useState([InitialTabDataSchema]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function extractData() {
+      const token = localStorage.getItem("token");
+      try {
+        const response = await getData("About", token);
+        if (response.success) {
+          setIsLoading(false);
+        }
+
+        setformData(response.data[0]);
+        setTabDataSchema(response.data[0].tabData);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    extractData();
+  }, []);
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    const token = localStorage.getItem("token");
+    try {
+      const mergedData = {
+        ...formData,
+        tabData: tabDataSchema,
+      };
+
+      const response = await updateData("About", mergedData, token);
+      if (response.success) {
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleFormDataChange = (id, newData) => {
+    setTabDataSchema((prevData) =>
+      prevData.map((item) => (item.id === id ? { ...item, ...newData } : item))
+    );
+  };
+
+  if (isLoading) {
+    return (
+      <div className="content-center flex items-center justify-center min-h-screen">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <div className="flex">
       <AdminSidebar />
@@ -14,14 +82,27 @@ const page = () => {
         <main className="flex-1 p-8">
           <FormControl
             controls={AboutControls}
-            formData={undefined}
-            setFormData={undefined}
+            formData={formData}
+            setFormData={setformData}
           />
-           <FormControl
-            controls={TabDataControls}
-            formData={undefined}
-            setFormData={undefined}
-          />
+          {tabDataSchema.map((item, idx) => {
+            return (
+              <FormControl
+                key={idx}
+                controls={TabDataControls}
+                formData={item}
+                setFormData={(newData) =>
+                  handleFormDataChange(item.id, newData)
+                }
+              />
+            );
+          })}
+          <button
+            className="bg-sky-800 px-4 py-2 rounded-lg hover:bg-sky-900 text-sm md:text-base"
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
         </main>
       </div>
     </div>
