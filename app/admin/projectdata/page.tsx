@@ -20,13 +20,14 @@ interface FormDataProp {
 }
 
 const page = () => {
-  const ProjectCard = ({ title, description, onClick }) => {
+  const ProjectCard = ({ imageUrl, title, description, onClick }) => {
     return (
       <div className="max-w-sm mx-auto">
         <div className="rounded-xl mt-3 bg-[#F0F4F8] py-8 px-4 h-60 flex flex-col justify-between">
           <div>
             <img
-              // src={imageUrl}
+              crossOrigin="anonymous"
+              src={imageUrl}
               alt={title}
               className="w-full h-32 object-cover rounded-lg mb-4"
             />
@@ -177,6 +178,7 @@ const page = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {formData.map((project) => (
                 <ProjectCard
+                  imageUrl={project.image}
                   key={project.id}
                   title={project.title}
                   description={project.description}
