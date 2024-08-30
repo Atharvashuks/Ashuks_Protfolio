@@ -1,28 +1,106 @@
-{
-  "Logo": "Ashuks",
-  "header": [
-    "Atharva",
-    2000,
-    "Web Developer",
-    1000,
-    "Mobile Developer",
-    1000,
-    "UI/UX Designer",
-    1000
-  ],
-  "summary": "test summary",
-  "achivementNumbers": [
-    {
-      "prefix": "test1",
-      "metrix": "test2",
-      "value": "12",
-      "postfix": "test3"
-    },
-    {
-      "prefix": "test4",
-      "metrix": "test5",
-      "value": "12345",
-      "postfix": "test6"
-    }
-  ]
-}
+[
+  {
+    "_id": "66cd8a8790670107e8606e89",
+    "Logo": "Ashuks",
+    "header": [
+      "Atharva",
+      2000,
+      "Web Developer",
+      1000,
+      "App Developer",
+      1000,
+      "Full Stack",
+      1000
+    ],
+    "summary": "Turning Coffee into Code: Crafting Full-Stack Magic from Front-End Fun to Back-End Brilliance!",
+    "achivementNumbers": [
+      {
+        "prefix": "",
+        "metrix": "Projects",
+        "value": "15",
+        "postfix": "+"
+      },
+      {
+        "prefix": "",
+        "metrix": "Recommendations",
+        "value": "20",
+        "postfix": "+"
+      },
+      {
+        "prefix": "",
+        "metrix": "Years",
+        "value": "2"
+      }
+    ]
+  },
+
+  {
+    "Logo": "Ashuks",
+    "header": [
+      "Atharva",
+      2000,
+      "Web Developer",
+      1000,
+      "Mobile Developer",
+      1000,
+      "UI/UX Designer",
+      1000
+    ],
+    "summary": "test summary",
+    "achivementNumbers": [
+      {
+        "prefix": "test1",
+        "metrix": "test2",
+        "value": "12",
+        "postfix": "test3"
+      },
+      {
+        "prefix": "test4",
+        "metrix": "test5",
+        "value": "12345",
+        "postfix": "test6"
+      }
+    ]
+  },
+  {
+    "_id": "66cdd30090670107e8606e93",
+    "aboutme": "I’m a dynamic Full Stack Web Developer with a flair for crafting interactive and responsive web applications. My expertise spans a robust tech stack including JavaScript, React, Next.js, Angular, Redux, Node.js, Express, MongoDB, GraphQL, TypeScript, and more. From mastering front-end magic with HTML and CSS to powering backend brilliance with Node.js and MongoDB, I’m adept at using a diverse range of tools like Playwright, Azure DevOps, and Power Apps. A fast learner and a collaborative team player, I thrive on expanding my skill set and driving innovative projects. Let’s create extraordinary applications together!",
+    "tabData": [
+      {
+        "title": "Skills",
+        "id": "skills",
+        "content": [
+          "React JS",
+          "Next JS",
+          "Node.js",
+          "Express",
+          "Next JS",
+          "MongoDB",
+          "JavaScript",
+          "Typescript",
+          "Python",
+          "Java",
+          "GIT",
+          "Azure",
+          "Playwright",
+          ".NET"
+        ]
+      },
+      {
+        "title": "Education",
+        "id": "education",
+        "content": ["Manav Rachna University(B.Tech CSE)", "AFGJI(High School)"]
+      },
+      {
+        "title": "Certifications",
+        "id": "certifications",
+        "content": [
+          "Python NPTEL",
+          "Infosys Java developer",
+          "Udemy Full Stack developer"
+        ]
+      }
+    ],
+    "letsConnect": "I’m actively exploring new opportunities and my inbox is always open. Whether you have a question, want to brainstorm, or simply feel like saying hi, I’m here and excited to connect. I’m passionate about collaborating with fellow developers, tech enthusiasts, and innovative minds. If you’ve got a project idea or just want to chat about the latest in web development, I am here. Let’s make something extraordinary together! Reach out via LinkedIn, GitHub, or Email. I look forward to connecting and creating something amazing with you!"
+  }
+]

@@ -1,8 +1,9 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 
 import { ProjectCard, ProjectTag } from "../components";
 import { motion, useInView } from "framer-motion";
+import { DataContext } from "../context/Provider";
 
 const ProjectSection = [
   {
@@ -66,11 +67,24 @@ const ProjectsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
+  const { projectDataSection, projectSectionData } = useContext(DataContext);
+
+  console.log("Project data", projectDataSection);
+  console.log("Section", projectSectionData);
+
+  const dataToMap = projectSectionData?.map((item) => {
+    return {
+      id: item.id || "",
+      name: item.name || "",
+      tag: item.tag || [],
+    };
+  });
+
   const handleTagChange = (newTag) => {
     setTag(newTag);
   };
 
-  const filteredProjects = projectsData.filter((project) =>
+  const filteredProjects = projectDataSection?.filter((project) =>
     project.tag.includes(tag)
   );
 
@@ -85,7 +99,7 @@ const ProjectsSection = () => {
         My Projects
       </h2>
       <div className="dark:text-white text-[#0000dd] flex flex-row justify-center items-center gap-2 py-6">
-        {ProjectSection.map((section) => {
+        {dataToMap?.map((section) => {
           return (
             <div key={section.id}>
               <ProjectTag

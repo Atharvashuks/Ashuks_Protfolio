@@ -9,15 +9,7 @@ import {
 } from "../../../components";
 import { ProjectDataControls } from "../../../dataConfig";
 import { getData, updateData } from "../../../apiEndpoint";
-interface FormDataProp {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  tag: string[];
-  gitUrl: string;
-  previewUrl: string;
-}
+import { ProjectDataProps } from "../../../types";
 
 const page = () => {
   const ProjectCard = ({ imageUrl, title, description, onClick }) => {
@@ -50,7 +42,7 @@ const page = () => {
     );
   };
 
-  const defaultProjectData: FormDataProp = {
+  const defaultProjectData: ProjectDataProps = {
     id: -1,
     title: "",
     description: "",
@@ -60,20 +52,21 @@ const page = () => {
     previewUrl: "",
   };
 
-  const [formData, setformData] = useState<FormDataProp[]>([
+  const [formData, setformData] = useState<ProjectDataProps[]>([
     defaultProjectData,
   ]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedCard, setSelectedCard] = useState<FormDataProp | null>(null);
+  const [selectedCard, setSelectedCard] = useState<ProjectDataProps | null>(
+    null
+  );
   const [updatedFields, setUpdatedFields] = useState<
-    Map<number, Partial<FormDataProp>>
+    Map<number, Partial<ProjectDataProps>>
   >(new Map());
 
   useEffect(() => {
     async function extractData() {
-      const token = localStorage.getItem("token");
       try {
-        const response = await getData("ProjectData", token);
+        const response = await getData("ProjectData");
         if (response.success) {
           setIsLoading(false);
         }
@@ -104,7 +97,7 @@ const page = () => {
     }
   };
 
-  const handleCardClick = (project: FormDataProp) => {
+  const handleCardClick = (project: ProjectDataProps) => {
     setSelectedCard(project);
   };
 
@@ -112,7 +105,7 @@ const page = () => {
     setSelectedCard(null);
   };
 
-  const handleFormDataUpdate = (updatedData: FormDataProp) => {
+  const handleFormDataUpdate = (updatedData: ProjectDataProps) => {
     setformData(
       formData.map((project) =>
         project.id === updatedData.id ? updatedData : project

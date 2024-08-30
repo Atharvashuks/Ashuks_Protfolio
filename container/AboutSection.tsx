@@ -1,8 +1,9 @@
 "use client";
-import React, { useTransition, useState } from "react";
+import React, { useTransition, useState, useContext } from "react";
 import Image from "next/image";
 
 import { TabButton } from "../components";
+import { DataContext } from "../context/Provider";
 
 const TAB_DATA = [
   {
@@ -29,39 +30,29 @@ const AboutSection = () => {
   const [tab, setTab] = useState("skills");
   const [isPending, startTransition] = useTransition();
 
+  const { aboutSectionData } = useContext(DataContext);
+
+  const TAB_DATA_TO_MAP = aboutSectionData?.tabData || TAB_DATA;
+
+  const dataToMap = TAB_DATA_TO_MAP?.map((item) => {
+    return {
+      id: item.id || "",
+      title: item.title || "",
+      content: item.content || [],
+    };
+  });
+
   const handleTabChange = (id: React.SetStateAction<string>) => {
     startTransition(() => {
       setTab(id);
     });
   };
 
-  const skillSection = TAB_DATA.find((t) => t.id === tab) || {
+  const skillSection = dataToMap?.find((t) => t.id === tab) || {
     title: "",
     id: "",
     content: [],
   };
-  const numberOfColumns = Math.ceil(skillSection.content.length / 3);
-
-  const gridClasses = `list-disc pl-2 grid grid-cols-${numberOfColumns} gap-4`;
-
-  //  const skillSection = TAB_DATA.find((t) => t.id === tab);
-
-  //  const groupedItems = [];
-  //  const itemsPerColumn = 5;
-
-  //  skillSection.content.forEach((item, index) => {
-  //    const columnIndex = Math.floor(index / itemsPerColumn);
-
-  //    if (!groupedItems[columnIndex]) {
-  //      groupedItems[columnIndex] = [];
-  //    }
-
-  //    groupedItems[columnIndex].push(item);
-  //  });
-
-  //  const numberOfColumns = groupedItems.length;
-
-  //  const gridClasses = `list-disc pl-2 grid grid-cols-${numberOfColumns} gap-4`;
 
   return (
     <section className="text-white dark:bg-[#121212] bg-[#000042]" id="about">
@@ -75,15 +66,11 @@ const AboutSection = () => {
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
           <p className="text-base lg:text-lg">
-            I am a full stack web developer with a passion for creating
-            interactive and responsive web applications. I have experience
-            working with JavaScript, React, Redux, Node.js, Express, PostgreSQL,
-            Sequelize, HTML, CSS, and Git. I am a quick learner and I am always
-            looking to expand my knowledge and skill set. I am a team player and
-            I am excited to work with others to create amazing applications.
+            {aboutSectionData?.aboutme ||
+              "I am a full stack web developer with a passion for creating interactive and responsive web applications. I have experience working with JavaScript, React, Redux, Node.js, Express, PostgreSQL, Sequelize, HTML, CSS, and Git. I am a quick learner and I am always looking to expand my knowledge and skill set. I am a team player and I am excited to work with others to create amazing applications."}
           </p>
           <div className="flex flex-row justify-start mt-8">
-            {TAB_DATA.map((t) => {
+            {dataToMap?.map((t) => {
               return (
                 <div key={t.id}>
                   <TabButton
@@ -97,26 +84,25 @@ const AboutSection = () => {
               );
             })}
           </div>
-          <div className="mt-8">
-            <ul className={gridClasses}>
-              {skillSection.content.map((item, idx) => {
-                return <li key={idx}>{item}</li>;
-              })}
-            </ul>
-          </div>
-
-          {/* <div className="mt-8">
-            <ul className={gridClasses}>
-              {groupedItems.map((items) => {
-                {
-                  items.map((item) => {
-                    console.log(item);
-                    return <li>{item}</li>;
-                  });
-                }
-              })}
-            </ul>
-          </div> */}
+          {skillSection.title === "Skills" ? (
+            <div className="mt-8">
+              <ul className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 list-disc">
+                {skillSection.content.map((item, idx) => (
+                  <li key={idx} className="col-span-1">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div className="mt-8">
+              <ul className="list-disc pl-2 grid gap-4">
+                {skillSection.content.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </section>

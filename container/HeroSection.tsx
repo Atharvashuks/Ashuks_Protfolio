@@ -1,9 +1,11 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import Link from "next/link";
+
+import { DataContext } from "../context/Provider";
 
 const arr = [
   "Atharva",
@@ -17,6 +19,8 @@ const arr = [
 ];
 
 const HeroSection = () => {
+  const { heroSectionData } = useContext(DataContext);
+
   return (
     <section className="lg:py-16">
       <div className="grid grid-cols-1 sm:grid-cols-12">
@@ -33,15 +37,15 @@ const HeroSection = () => {
             <br></br>
             <TypeAnimation
               className="text-[#000042] dark:text-white"
-              sequence={arr}
+              sequence={heroSectionData?.header || arr}
               wrapper="span"
               speed={50}
               repeat={Infinity}
             />
           </h1>
           <p className="dark:text-[#ADB7BE] text-[#0044ff] text-base sm:text-lg mb-6 lg:text-xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-            voluptuous.
+            {heroSectionData?.summary ||
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,voluptuous."}
           </p>
           <div>
             <Link
@@ -52,11 +56,12 @@ const HeroSection = () => {
             </Link>
 
             <Link
-              href="/"
+              href="https://drive.google.com/file/d/1AMOdUtjtLMxYSx3V_mBJhY0YK_7FqG17/view?usp=sharing"
+              target="_blank"
               className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-gradient-to-br  dark:from-sky-200 dark:to-cyan-800 from-[rgb(0,0,83)] to-[#0000dd] hover:bg-white-200  hover:bg-slate-800 mt-3"
             >
               <span className="block dark:bg-[#121212] bg-[#0000aa] dark:hover:bg-sky-50 rounded-full px-5 py-2 text-white dark:hover:text-cyan-900">
-                Download CV
+                Download Resume
               </span>
             </Link>
           </div>

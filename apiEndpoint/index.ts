@@ -17,13 +17,12 @@ export const addData = async (currentTab, formData, token) => {
   }
 };
 
-export const getData = async (currentTab, token) => {
+export const getData = async (currentTab) => {
   try {
     const response = await fetch(`/api/data/${currentTab}/GET`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
     });
 
