@@ -1,14 +1,5 @@
 import React from "react";
-
-interface InputFormProps {
-  label: string;
-  placeholder: string;
-  type: "text" | "textarea";
-  value: string;
-  onChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
-}
+import { InputFormProps } from "../types";
 
 const InputForm: React.FC<InputFormProps> = ({
   label,

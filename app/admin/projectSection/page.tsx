@@ -9,11 +9,7 @@ import {
 } from "../../../components";
 import { ProjectSectionControls } from "../../../dataConfig";
 import { getData, updateData } from "../../../apiEndpoint";
-interface FormDataProp {
-  id: number;
-  name: string;
-  tag: string;
-}
+import { ProjectSectionProps } from "../../../types";
 
 const page = () => {
   const ProjectCard = ({ name, tag, onClick }) => {
@@ -35,26 +31,27 @@ const page = () => {
     );
   };
 
-  const defaultProjectData: FormDataProp = {
+  const defaultProjectData: ProjectSectionProps = {
     id: -1,
     name: "",
     tag: "",
   };
 
-  const [formData, setformData] = useState<FormDataProp[]>([
+  const [formData, setformData] = useState<ProjectSectionProps[]>([
     defaultProjectData,
   ]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedCard, setSelectedCard] = useState<FormDataProp | null>(null);
+  const [selectedCard, setSelectedCard] = useState<ProjectSectionProps | null>(
+    null
+  );
   const [updatedFields, setUpdatedFields] = useState<
-    Map<number, Partial<FormDataProp>>
+    Map<number, Partial<ProjectSectionProps>>
   >(new Map());
 
   useEffect(() => {
     async function extractData() {
-      const token = localStorage.getItem("token");
       try {
-        const response = await getData("ProjectSection", token);
+        const response = await getData("ProjectSection");
         if (response.success) {
           setIsLoading(false);
         }
@@ -85,7 +82,7 @@ const page = () => {
     }
   };
 
-  const handleCardClick = (project: FormDataProp) => {
+  const handleCardClick = (project: ProjectSectionProps) => {
     setSelectedCard(project);
   };
 
@@ -93,7 +90,7 @@ const page = () => {
     setSelectedCard(null);
   };
 
-  const handleFormDataUpdate = (updatedData: FormDataProp) => {
+  const handleFormDataUpdate = (updatedData: ProjectSectionProps) => {
     setformData(
       formData.map((project) =>
         project.id === updatedData.id ? updatedData : project

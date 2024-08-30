@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import NavLink from "../components/NavLink";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import MenuOverlay from "../components/MenuOverlay";
 import ToggleButton from "../components/ToggleButton";
+import { DataContext } from "../context/Provider";
 
 const navLinks = [
   {
@@ -22,6 +23,8 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const { heroSectionData } = useContext(DataContext);
+
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   return (
@@ -31,7 +34,7 @@ const Navbar = () => {
           href={"/"}
           className="text-2xl md:text-5xl text-white font-semibold"
         >
-          Ashuks
+          {heroSectionData?.Logo || "Ashuks"}
         </Link>
         <div className="mobile-menu block md:hidden">
           {!navbarOpen ? (

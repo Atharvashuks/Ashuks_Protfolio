@@ -5,8 +5,8 @@ import { authGuard } from "../../../../middleware/authGuard";
 
 export const dynamic = "force-dynamic";
 
-export const GET = authGuard(async (req) => {
+export const GET = async (req) => {
   const response = await fetchDataFromDB(ProjectSection);
 
   return NextResponse.json(response);
-});
+};

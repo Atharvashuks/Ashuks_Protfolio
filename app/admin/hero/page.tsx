@@ -28,9 +28,8 @@ const page = () => {
 
   useEffect(() => {
     async function extractData() {
-      const token = localStorage.getItem("token");
       try {
-        const response = await getData("HeroSection", token);
+        const response = await getData("HeroSection");
         if (response.success) {
           setIsLoading(false);
         }

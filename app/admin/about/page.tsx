@@ -5,29 +5,30 @@ import { AdminNavbar, AdminSidebar, Loader } from "../../../components";
 import { AboutControls, TabDataControls } from "../../../dataConfig";
 import FormControl from "../../../components/FormControl";
 import { getData, updateData } from "../../../apiEndpoint";
-
-const InitialTabDataSchema = {
-  title: String,
-  id: String,
-  content: [String],
-};
-
-const InitialFormData = {
-  aboutme: String,
-  tabData: [InitialTabDataSchema],
-  letsConnect: String,
-};
+import { AboutDataProps, TabDataProps } from "../../../types";
 
 const page = () => {
-  const [formData, setformData] = useState(InitialFormData);
-  const [tabDataSchema, setTabDataSchema] = useState([InitialTabDataSchema]);
+  const defaultTabData: TabDataProps = {
+    title: "",
+    id: "",
+    content: [""],
+  };
+
+  const defaultAboutData: AboutDataProps = {
+    aboutme: "",
+    tabData: [defaultTabData],
+    letsConnect: "",
+  };
+  const [formData, setformData] = useState<AboutDataProps>(defaultAboutData);
+  const [tabDataSchema, setTabDataSchema] = useState<TabDataProps[]>([
+    defaultTabData,
+  ]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function extractData() {
-      const token = localStorage.getItem("token");
       try {
-        const response = await getData("About", token);
+        const response = await getData("About");
         if (response.success) {
           setIsLoading(false);
         }
