@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model About {
+  id          String    @id @default(cuid())
+  aboutme     String?
+  letsConnect String?
+  tabData     TabData[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model TabData {
+  id        String    @id @default(cuid())
+  title     String?
+  legacyId  String?   // your mongoose `id: String`
+  aboutId   String
+  about     About     @relation(fields: [aboutId], references: [id], onDelete: Cascade)
+  contents  TabContent[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model TabContent {
+  id        String   @id @default(cuid())
+  value     String
+  tabDataId String
+  tabData   TabData  @relation(fields: [tabDataId], references: [id], onDelete: Cascade)
+}
+
+model HeroSection {
+  id                String   @id @default(cuid())
+  logo              String?
+  summary           String?
+  // "header: []" in mongoose was untyped; either make it JSON or a text[].
+  header            Json?
+  achievementNumbers AchievementDetails[]
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model AchievementDetails {
+  id        String   @id @default(cuid())
+  legacyId  Int?     // your mongoose `id: Number`
+  prefix    String?
+  metrix    String?
+  value     String?
+  postfix   String?
+  heroId    String
+  hero      HeroSection @relation(fields: [heroId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProjectsData {
+  id          String   @id @default(cuid())
+  legacyId    Int?
+  title       String?
+  description String?
+  image       String?
+  gitUrl      String?
+  previewUrl  String?
+  tags        ProjectTag[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ProjectTag {
+  id         String      @id @default(cuid())
+  value      String
+  projectId  String
+  project    ProjectsData @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectSection {
+  id        String   @id @default(cuid())
+  legacyId  Int?
+  name      String?
+  tag       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

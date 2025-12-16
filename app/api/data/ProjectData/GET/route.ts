@@ -1,11 +1,24 @@
+// import { NextResponse } from "next/server";
+// import { fetchDataFromDB } from "../../../../../Utility/fetchDataUtility";
+// import ProjectData from "../../../../../models/ProjectsData.model";
+
+// export const dynamic = "force-dynamic";
+
+// export const GET = async (req) => {
+//   const response = await fetchDataFromDB(ProjectData);
+
+//   return NextResponse.json(response);
+// };
+
+
 import { NextResponse } from "next/server";
+import prisma from "../../../../../config/db"; // adjust path if needed
 import { fetchDataFromDB } from "../../../../../Utility/fetchDataUtility";
-import ProjectData from "../../../../../models/ProjectsData.model";
 
 export const dynamic = "force-dynamic";
 
-export const GET = async (req) => {
-  const response = await fetchDataFromDB(ProjectData);
+export const GET = async () => {
+  const response = await fetchDataFromDB(prisma.projectsData, { include: { tags: true } });
 
   return NextResponse.json(response);
 };

@@ -4,6 +4,7 @@ import React, { useState, useRef, useContext } from "react";
 import { ProjectCard, ProjectTag } from "../components";
 import { motion, useInView } from "framer-motion";
 import { DataContext } from "../context/Provider";
+import { ProjectDataProps, ProjectSectionProps } from "@/types";
 
 const ProjectSection = [
   {
@@ -69,10 +70,8 @@ const ProjectsSection = () => {
 
   const { projectDataSection, projectSectionData } = useContext(DataContext);
 
-  console.log("Project data", projectDataSection);
-  console.log("Section", projectSectionData);
 
-  const dataToMap = projectSectionData?.map((item) => {
+  const dataToMap = projectSectionData?.map((item: ProjectSectionProps) => {
     return {
       id: item.id || "",
       name: item.name || "",
@@ -80,13 +79,24 @@ const ProjectsSection = () => {
     };
   });
 
-  const handleTagChange = (newTag) => {
+  const handleTagChange = (newTag: string) => {
     setTag(newTag);
   };
 
-  const filteredProjects = projectDataSection?.filter((project) =>
-    project.tag.includes(tag)
-  );
+  const filteredProjects = (projectDataSection ?? []).filter((project: ProjectDataProps) => {
+  const tagValues: string[] = (project.tags ?? []).map((t: any) =>
+    typeof t === "string" ? t : t?.value
+  ).filter(Boolean);
+
+  const needle = String(tag ?? "").trim().toLowerCase();
+  const haystack = tagValues.map(v => String(v).trim().toLowerCase());
+
+  if (needle === "all") return true;
+
+  return haystack.includes(needle);
+});
+
+  
 
   const cardVariants = {
     initial: { y: 50, opacity: 0 },
@@ -99,7 +109,7 @@ const ProjectsSection = () => {
         My Projects
       </h2>
       <div className="dark:text-white text-[#0000dd] flex flex-row justify-center items-center gap-2 py-6">
-        {dataToMap?.map((section) => {
+        {dataToMap?.map((section: ProjectSectionProps) => {
           return (
             <div key={section.id}>
               <ProjectTag
@@ -112,7 +122,7 @@ const ProjectsSection = () => {
         })}
       </div>
       <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
-        {filteredProjects.map((project, index) => (
+        {filteredProjects?.map((project: ProjectDataProps, index: number) => (
           <motion.li
             key={index}
             variants={cardVariants}
