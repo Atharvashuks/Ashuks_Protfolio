@@ -1,4 +1,4 @@
-export const addData = async (currentTab, formData, token) => {
+export const addData = async (currentTab: any, formData: any, token: any) => {
   try {
     const response = await fetch(`/api/data/${currentTab}/POST`, {
       method: "POST",
@@ -17,7 +17,7 @@ export const addData = async (currentTab, formData, token) => {
   }
 };
 
-export const getData = async (currentTab) => {
+export const getData = async (currentTab: string) => {
   try {
     const response = await fetch(`/api/data/${currentTab}/GET`, {
       method: "GET",
@@ -57,7 +57,7 @@ export const updateData = async (
   }
 };
 
-export const login = async (formData, token) => {
+export const login = async (formData: any, token: any) => {
   try {
     const response = await fetch(`/api/auth/login`, {
       method: "POST",
