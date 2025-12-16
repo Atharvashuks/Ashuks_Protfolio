@@ -16,7 +16,7 @@ import { saveDataToDB } from "../../../../../Utility/postDataUtility";
 import prisma from "@/config/db";
 import { authGuard } from "../../../../middleware/authGuard";
 
-export const POST = authGuard(async (req) => {
+export const POST = authGuard(async (req: any) => {
   const extractData = await req.json();
 
   const response = await saveDataToDB(prisma.about, {

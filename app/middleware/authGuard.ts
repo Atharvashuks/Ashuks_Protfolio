@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 
-export function authGuard(handler) {
-  return async (req, res) => {
+export function authGuard(handler: any) {
+  return async (req: any, res: any) => {
     const token = req.headers.get("authorization")?.split(" ")[1];
 
     if (!token) {

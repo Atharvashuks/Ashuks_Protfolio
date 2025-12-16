@@ -12,7 +12,14 @@ import { getData, updateData } from "../../../apiEndpoint";
 import { ProjectDataProps } from "../../../types";
 
 const page = () => {
-  const ProjectCard = ({ imageUrl, title, description, onClick }) => {
+  type ProjectCardProps = {
+    imageUrl: string;
+    title: string;
+    description: string;
+    onClick: () => void;
+  };
+
+  const ProjectCard: React.FC<ProjectCardProps> = ({ imageUrl, title, description, onClick }) => {
     return (
       <div className="max-w-sm mx-auto">
         <div className="rounded-xl mt-3 bg-[#F0F4F8] py-8 px-4 h-60 flex flex-col justify-between">
@@ -146,7 +153,7 @@ const page = () => {
                   <FormControl
                     controls={ProjectDataControls}
                     formData={selectedCard}
-                    setFormData={(updatedData) =>
+                    setFormData={(updatedData: ProjectDataProps) =>
                       handleFormDataUpdate(updatedData)
                     }
                   />

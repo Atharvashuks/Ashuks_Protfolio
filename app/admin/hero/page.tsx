@@ -61,7 +61,7 @@ const page = () => {
     }
   };
 
-  const handleFormDataChange = (id, newData) => {
+  const handleFormDataChange = (id: NumberConstructor, newData: any) => {
     setAchivementData((prevData) =>
       prevData.map((item) => (item.id === id ? { ...item, ...newData } : item))
     );
@@ -92,7 +92,7 @@ const page = () => {
                 key={idx}
                 controls={AchivementsControls}
                 formData={item}
-                setFormData={(newData) =>
+                setFormData={(newData: any) =>
                   handleFormDataChange(item.id, newData)
                 }
               />

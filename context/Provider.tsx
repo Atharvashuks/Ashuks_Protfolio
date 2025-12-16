@@ -20,7 +20,7 @@ export const DataContext = createContext<DataContextProp>({
   error: null,
 });
 
-const Provider = ({ children }) => {
+const Provider = ({ children }:any) => {
   const [aboutSectionData, setaboutSectionData] =
     useState<AboutDataProps | null>(null);
 
@@ -61,7 +61,11 @@ const Provider = ({ children }) => {
         setProjectDataSection(projectDataResponse.data);
         setProjectSectionData(projectSectionResponse.data);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError(String(error));
+        }
       } finally {
         setIsLoading(false);
       }
