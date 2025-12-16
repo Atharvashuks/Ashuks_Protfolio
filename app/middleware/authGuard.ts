@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 
-export function authGuard(handler: { (req: Request): Promise<NextResponse<{ success: boolean; data: any; message: string; } | { success: boolean; message: string; data?: undefined; }>>; (req: any): Promise<NextResponse<{ success: boolean; message: string; }>>; (req: any): Promise<NextResponse<{ success: boolean; data: any; message: string; } | { success: boolean; message: string; data?: undefined; }>>; (req: any): Promise<NextResponse<{ success: boolean; message: string; }>>; (req: any): Promise<NextResponse<{ success: boolean; data: any; message: string; } | { success: boolean; message: string; data?: undefined; }>>; (req: any): Promise<NextResponse<{ success: boolean; message: string; }>>; (req: any): Promise<NextResponse<{ success: boolean; data: any; message: string; } | { success: boolean; message: string; data?: undefined; }>>; (req: any): Promise<NextResponse<{ success: boolean; message: string; }>>; (arg0: any, arg1: any): any; }) {
-  return async (req: { headers: { get: (arg0: string) => string; }; user: any; }, res: any) => {
+export function authGuard(handler) {
+  return async (req, res) => {
     const token = req.headers.get("authorization")?.split(" ")[1];
 
     if (!token) {
