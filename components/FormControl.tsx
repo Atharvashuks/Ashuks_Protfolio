@@ -3,8 +3,8 @@
 import React from "react";
 import InputForm from "./InputForm";
 
-const FormControl = ({ controls, formData, setFormData }) => {
-  return controls.map((item) => {
+const FormControl = ({ controls, formData, setFormData }: any) => {
+  return controls.map((item: any) => {
     const rawValue = formData?.[item.name];
 
     const value =

@@ -12,7 +12,13 @@ import { getData, updateData } from "../../../apiEndpoint";
 import { ProjectSectionProps } from "../../../types";
 
 const page = () => {
-  const ProjectCard = ({ name, tag, onClick }) => {
+  type ProjectCardProps = {
+    name: string;
+    tag: string;
+    onClick: () => void;
+  };
+
+  const ProjectCard: React.FC<ProjectCardProps> = ({ name, tag, onClick }) => {
     return (
       <div className="relative bg-white shadow-lg rounded-lg p-4 mb-4">
         <div className="flex items-center justify-between">
@@ -131,7 +137,7 @@ const page = () => {
                   <FormControl
                     controls={ProjectSectionControls}
                     formData={selectedCard}
-                    setFormData={(updatedData) =>
+                    setFormData={(updatedData: ProjectSectionProps) =>
                       handleFormDataUpdate(updatedData)
                     }
                   />

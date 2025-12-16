@@ -76,7 +76,7 @@ useEffect(() => {
     }
   };
 
-  const handleFormDataChange = (id, newData) => {
+  const handleFormDataChange = (id: string, newData: any) => {
     setTabDataSchema((prevData) =>
       prevData.map((item) => (item.id === id ? { ...item, ...newData } : item))
     );
@@ -107,7 +107,7 @@ useEffect(() => {
                 key={idx}
                 controls={TabDataControls}
                 formData={item}
-                setFormData={(newData) =>
+                setFormData={(newData: any) =>
                   handleFormDataChange(item.id, newData)
                 }
               />

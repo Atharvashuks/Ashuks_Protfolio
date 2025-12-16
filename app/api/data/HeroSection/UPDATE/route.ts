@@ -30,7 +30,7 @@ import { authGuard } from "../../../../middleware/authGuard";
 
 export const dynamic = "force-dynamic";
 
-export const PUT = authGuard(async (req) => {
+export const PUT = authGuard(async (req: Request) => {
   try {
     const extractData = await req.json();
 
