@@ -1,10 +1,18 @@
-import mongoose from "mongoose";
+import { PrismaClient } from '../app/generated/prisma/client'
+import { PrismaPg } from '@prisma/adapter-pg'
 
-export default async function connectToDB() {
-  try {
-    await mongoose.connect(process.env.MONGODB_URL || "");
-    console.log("Database connected successfully");
-  } catch (e) {
-    console.log(e);
-  }
+const globalForPrisma = global as unknown as {
+    prisma: PrismaClient
 }
+
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL,
+})
+
+const prisma = globalForPrisma.prisma || new PrismaClient({
+  adapter,
+})
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+
+export default prisma

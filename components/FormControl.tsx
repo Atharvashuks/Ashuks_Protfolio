@@ -4,24 +4,37 @@ import React from "react";
 import InputForm from "./InputForm";
 
 const FormControl = ({ controls, formData, setFormData }) => {
-  return controls.map(
-    (item: {
-      name: any;
-      label: string;
-      placeholder: string;
-      type: "text" | "textarea";
-    }) => (
+  return controls.map((item) => {
+    const rawValue = formData?.[item.name];
+
+    const value =
+      Array.isArray(rawValue) ? rawValue.join("\n") : (rawValue ?? "");
+
+    return (
       <InputForm
+        key={item.name}
         label={item.label}
-        placeholder={item.placeholder}
+        placeholder={
+          Array.isArray(rawValue)
+            ? "Enter one item per line"
+            : item.placeholder
+        }
         type={item.type}
-        value={formData[item.name] || " "}
+        value={value}
         onChange={(e) => {
-          setFormData({ ...formData, [item.name]: e.target.value });
+          const next =
+            Array.isArray(rawValue)
+              ? e.target.value
+                  .split("\n")
+                  .map((s) => s.trim())
+                  .filter(Boolean)
+              : e.target.value;
+
+          setFormData({ ...formData, [item.name]: next });
         }}
       />
-    )
-  );
+    );
+  });
 };
 
 export default FormControl;

@@ -25,23 +25,38 @@ const page = () => {
   ]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function extractData() {
-      try {
-        const response = await getData("About");
-        if (response.success) {
-          setIsLoading(false);
-        }
+useEffect(() => {
+  async function extractData() {
+    try {
+      const response = await getData("About");
 
-        setformData(response.data[0]);
-        setTabDataSchema(response.data[0].tabData);
-      } catch (error) {
-        console.log(error);
+      if (response?.success) {
+        const about = response.data[0];
+
+        const normalizedTabData = (about.tabData ?? []).map((t: any) => ({
+          title: t.title ?? "",
+          id: t.legacyId ?? t.id,
+          content: (t.contents ?? []).map((c: any) => c.value),
+          prismaId: t.id,
+        }));
+
+        setformData({
+          aboutme: about.aboutme ?? "",
+          letsConnect: about.letsConnect ?? "",
+          tabData: normalizedTabData,
+        });
+
+        setTabDataSchema(normalizedTabData);
+        setIsLoading(false);
       }
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    extractData();
-  }, []);
+  extractData();
+}, []);
+
 
   const handleSubmit = async () => {
     setIsLoading(true);

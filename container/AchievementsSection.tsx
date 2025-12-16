@@ -2,6 +2,7 @@
 import React, { useContext } from "react";
 import { AnimatedCounter } from "../components";
 import { DataContext } from "../context/Provider";
+import { AchivementDataProps } from "@/types";
 
 const achievementsList = [
   {
@@ -26,7 +27,7 @@ const achievementsList = [
 const AchievementsSection = () => {
   const { achivementSectionData } = useContext(DataContext);
 
-  const dataToMap = achivementSectionData?.map((item) => {
+  const dataToMap = achivementSectionData?.map((item: AchivementDataProps) => {
     return {
       prefix: item.prefix || "",
       metrix: item.metrix || "",
@@ -39,7 +40,7 @@ const AchievementsSection = () => {
     <div className="py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
       <div className="dark:sm:border-[#33353F] sm:border-[#0044ff] sm:border rounded-md py-8 px-16 flex flex-col sm:flex-row items-center justify-between">
         {dataToMap
-          ? dataToMap.map((achievement, index) => {
+          ? dataToMap.map((achievement: AchivementDataProps, index: number) => {
               return (
                 <div
                   key={index}
