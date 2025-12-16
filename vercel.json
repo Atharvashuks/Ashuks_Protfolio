@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://ashuks.com/$1",
+      "permanent": true
+    }
+  ]
+}
